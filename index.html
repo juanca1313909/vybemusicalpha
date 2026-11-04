@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07070b">
+  <meta name="description" content="VYBE MUSIC NEXUS — Tu música, tu ambiente.">
+  <title>VYBE MUSIC NEXUS | ULTIMATE PRO</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar glass">
+      <button class="brand" onclick="switchTab('home')" aria-label="Inicio">
+        <span class="brand-mark">V</span><span>VYBE <b>NEXUS</b></span>
+      </button>
+      <div class="top-actions">
+        <button class="pro-pill-btn pulse-glow" onclick="switchTab('pro')">👑 VIP PRO</button>
+        <button class="icon-btn" onclick="switchTab('profile')" aria-label="Perfil">👤</button>
+        <button class="icon-btn" onclick="switchTab('settings')" aria-label="Ajustes">⚙</button>
+      </div>
+    </header>
+
+    <main id="main-container">
+      <!-- VISTA INICIO -->
+      <section class="view active fade-in" id="view-home">
+        <div class="hero-banner">
+          <div class="hero-content">
+            <span class="badge gold-badge">👑 EXPERIENCIA DEFINITIVA</span>
+            <h1 class="hero-title">El sonido de<br><span class="text-gradient">tu mundo.</span></h1>
+            <p class="hero-subtitle">Tu música local y catálogo Top Colombia con calidad de estudio.</p>
+            <div class="action-group">
+              <button class="btn btn-primary shadow-glow" onclick="document.getElementById('file-selector').click()">
+                ＋ Importar Música
+              </button>
+              <button class="btn btn-gold shadow-gold pulse" onclick="switchTab('pro')">
+                PROBAR 1 MES GRATIS
+              </button>
+            </div>
+          </div>
+          <input id="file-selector" type="file" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg,.aac" multiple hidden>
+        </div>
+
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">🇨🇴 CATÁLOGO PÚBLICO</span>
+              <h2 class="section-title">TOP DE COLOMBIA</h2>
+            </div>
+            <button class="btn btn-icon-text" onclick="switchTab('catalog')">Ver todo &rarr;</button>
+          </div>
+          <div id="catalog-home-list" class="track-list">
+             <div class="empty-state"><p>Cargando catálogo...</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">TU COLECCIÓN</span>
+              <h2 class="section-title">Escuchado en VYBE</h2>
+            </div>
+            <span class="pill-counter" id="track-count">0 pistas</span>
+          </div>
+          
+          <div class="search-bar">
+            <input id="library-search" type="search" placeholder="Buscar canción o artista...">
+          </div>
+
+          <div id="tracks-list" class="track-list">
+            <div class="empty-state">
+              <h3>Tu biblioteca empieza aquí</h3>
+              <p>Importa archivos de audio desde tu dispositivo.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- VISTA CATÁLOGO -->
+      <section class="view fade-in" id="view-catalog">
+        <div class="page-header">
+          <span class="badge red-badge">TENDENCIAS</span>
+          <h1 class="page-title">Top <span>Colombia</span></h1>
+        </div>
+        <label class="search-bar">
+          <input id="catalog-search" type="search" placeholder="Buscar en TOP DE COLOMBIA...">
+        </label>
+        <div class="chips-container">
+          <button class="chip active" data-genre="Todos">Todos</button>
+          <button class="chip" data-genre="Reggaetón">Reggaetón</button>
+          <button class="chip" data-genre="Urbano">Urbano</button>
+          <button class="chip" data-genre="Vallenato">Vallenato</button>
+          <button class="chip" data-genre="Trap">Trap</button>
+        </div>
+        <div id="catalog-list" class="track-list"></div>
+      </section>
+
+      <!-- VISTA BÚSQUEDA -->
+      <section class="view fade-in" id="view-search">
+        <div class="page-header"><h1 class="page-title">Buscar<span>.</span></h1></div>
+        <input id="global-search" type="search" class="search-bar" placeholder="Buscar...">
+        <div id="search-results" class="track-list"></div>
+      </section>
+
+      <!-- VISTA BIBLIOTECA -->
+      <section class="view fade-in" id="view-library">
+        <div class="page-header"><h1 class="page-title">Biblioteca<span>.</span></h1></div>
+        <div id="library-list" class="track-list"></div>
+      </section>
+
+      <!-- VISTA VYBE AI -->
+      <section class="view fade-in" id="view-ai">
+        <div class="page-header"><h1 class="page-title">VYBE <span>AI</span></h1></div>
+      </section>
+
+      <!-- VISTA FAVORITOS -->
+      <section class="view fade-in" id="view-favorites">
+        <div class="page-header"><h1 class="page-title">Favoritos<span>.</span></h1></div>
+        <div id="favorites-list" class="track-list"></div>
+      </section>
+
+      <!-- VISTA PARTY -->
+      <section class="view fade-in" id="view-party">
+        <div class="page-header"><h1 class="page-title">VYBE <span>Party</span></h1></div>
+      </section>
+
+      <!-- VISTA PRO / VIP -->
+      <section class="view fade-in" id="view-pro">
+        <div class="page-header text-center">
+          <h1 class="page-title">VYBE <span class="text-gold">PRO</span></h1>
+          <p>Desbloquea ecualizador de 5 bandas, audio 8D y calidad Hi-Fi.</p>
+        </div>
+        <div class="premium-card shadow-gold-large">
+          <div class="premium-badge-top">OFERTA DE BIENVENIDA</div>
+          <h2 class="premium-price">$0 <small>COP / primer mes</small></h2>
+          <ul class="premium-features">
+            <li><div><strong>Audio Hi-Fi Losless</strong><p>Calidad de estudio.</p></div></li>
+            <li><div><strong>EQ & 8D Audio Surround</strong><p>Ecualizador gráfico y sonido espacial.</p></div></li>
+            <li><div><strong>Modo Karaoke en vivo</strong><p>Letras sincronizadas.</p></div></li>
+          </ul>
+          <button class="btn btn-gold btn-block pulse" id="activate-trial-btn">DESBLOQUEAR 1 MES GRATIS</button>
+          <div id="pro-status-box" class="pro-status hidden mt-4 text-center" style="color:#00ff87; font-weight:bold;">👑 ¡VIP PRO ACTIVO!</div>
+        </div>
+      </section>
+
+      <!-- VISTA PERFIL / AUTH -->
+      <section class="view fade-in" id="view-profile">
+        <div class="page-header"><h1 class="page-title">Tu <span>Perfil</span></h1></div>
+        <div class="glass-card mb-4">
+          <h2 id="username-display">Oyente Local</h2>
+          <span class="badge gray-badge" id="vip-badge">PLAN GRATUITO</span>
+        </div>
+        <div class="glass-card" id="auth-panel">
+          <h3>Sincronizar Cuenta</h3>
+          <form id="auth-form" class="form-group">
+            <div class="input-field"><input type="email" id="auth-email" placeholder="Correo electrónico"></div>
+            <div class="input-field"><input type="password" id="auth-password" placeholder="Contraseña"></div>
+            <button type="button" class="btn btn-primary btn-block" id="login-btn">Entrar / Registrarse</button>
+          </form>
+          <button class="btn btn-danger btn-block hidden mt-4" id="logout-btn">Cerrar sesión</button>
+        </div>
+      </section>
+
+      <!-- VISTA AJUSTES -->
+      <section class="view fade-in" id="view-settings">
+        <div class="page-header"><h1 class="page-title">Ajustes<span>.</span></h1></div>
+        <div class="glass-card settings-list">
+           <div class="setting-item">
+             <strong>Tema de Color</strong>
+             <select id="theme-selector" class="select-css">
+                <option value="violet">Morado VYBE</option>
+                <option value="neon-green">Verde Neón</option>
+                <option value="fire-red">Rojo 4KT</option>
+             </select>
+           </div>
+           <button class="btn btn-danger btn-block" id="clear-library-btn">Borrar toda mi biblioteca</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- MINI PLAYER -->
+    <div class="mini-player-wrapper hidden" id="mini-player" onclick="openPlayer()">
+      <div class="mini-player glass">
+        <div class="mini-art"><div class="vinyl-record rotating"></div></div>
+        <div class="mini-info">
+          <strong id="mini-title" class="truncate">Sin reproducción</strong>
+          <span id="mini-artist" class="truncate">VYBE MUSIC</span>
+        </div>
+        <button class="play-pause-btn" id="mini-play-btn" onclick="event.stopPropagation(); togglePlay()">▶</button>
+      </div>
+      <div class="mini-progress-bar"><div class="mini-progress-fill" id="mini-progress"></div></div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav glass">
+      <button class="nav-item active" onclick="switchTab('home')"><span>⌂</span><span>Inicio</span></button>
+      <button class="nav-item" onclick="switchTab('catalog')"><span>🇨🇴</span><span>TOP</span></button>
+      <button class="nav-item" onclick="switchTab('search')"><span>⌕</span><span>Buscar</span></button>
+      <button class="nav-item" onclick="switchTab('library')"><span>▤</span><span>Biblio</span></button>
+      <button class="nav-item" onclick="switchTab('pro')"><span>👑</span><span>PRO</span></button>
+    </nav>
+  </div>
+
+  <!-- REPRODUCTOR FULLSCREEN TIPO SPOTIFY PRO -->
+  <div class="player-fullscreen hidden" id="player-overlay">
+    <div class="player-content">
+      <div class="player-header">
+        <button class="icon-btn" onclick="closePlayer()">⌄</button>
+        <span class="badge gold-badge">💎 VYBE PRO</span>
+        <button class="icon-btn" onclick="toggleFxPanel()">🎛</button>
+      </div>
+      
+      <div class="player-art-container">
+        <div class="player-art" id="album-art">🎵</div>
+      </div>
+      
+      <!-- PANEL FX (EQ y 8D) -->
+      <div class="fx-panel glass-card hidden" id="fx-panel">
+        <div class="fx-header">
+          <h3>Ecualizador Studio PRO</h3>
+          <button class="icon-btn" onclick="toggleFxPanel()">✕</button>
+        </div>
+        <div class="fx-switches">
+          <label class="fx-switch"><span>Bass Booster</span><label class="toggle-switch"><input type="checkbox" id="bass-toggle"><span class="slider"></span></label></label>
+          <label class="fx-switch"><span>Audio 8D Espacial</span><label class="toggle-switch"><input type="checkbox" id="8d-toggle"><span class="slider"></span></label></label>
+        </div>
+        <div class="eq-container mt-4">
+          <div class="eq-band"><input type="range" class="eq-slider" id="eq-60" min="-15" max="15" value="0"><span class="eq-label">60Hz</span></div>
+          <div class="eq-band"><input type="range" class="eq-slider" id="eq-230" min="-15" max="15" value="0"><span class="eq-label">230Hz</span></div>
+          <div class="eq-band"><input type="range" class="eq-slider" id="eq-910" min="-15" max="15" value="0"><span class="eq-label">910Hz</span></div>
+          <div class="eq-band"><input type="range" class="eq-slider" id="eq-3k" min="-15" max="15" value="0"><span class="eq-label">3kHz</span></div>
+          <div class="eq-band"><input type="range" class="eq-slider" id="eq-14k" min="-15" max="15" value="0"><span class="eq-label">14kHz</span></div>
+        </div>
+      </div>
+
+      <div class="player-info-container">
+        <div class="track-text">
+          <h2 id="player-title">Sin reproducción</h2>
+          <p id="player-artist">Artista</p>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <input type="range" id="seek-bar" class="seek-slider" min="0" max="1000" value="0">
+        <div class="time-row"><span id="current-time">0:00</span><span id="duration-time">0:00</span></div>
+      </div>
+      
+      <div class="main-controls">
+        <button class="control-btn" onclick="previousTrack()">|◀</button>
+        <button class="play-btn" id="big-play-btn" onclick="togglePlay()">▶</button>
+        <button class="control-btn" onclick="nextTrack()">▶|</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-engine" crossorigin="anonymous"></audio>
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase-config.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
